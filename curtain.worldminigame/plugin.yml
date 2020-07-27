@@ -1,0 +1,9 @@
+name: WorldMinigame
+main: curtain.worldminigame.WorldMinigamePlugin
+author: curtain_
+version: 0.1
+description: Fun little minigame to play.
+commands:
+    worldgame:
+        aliases: wmg
+    wmgforceclean:
