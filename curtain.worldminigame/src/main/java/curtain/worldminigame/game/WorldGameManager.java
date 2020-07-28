@@ -68,14 +68,14 @@ public class WorldGameManager implements Listener
 		
 		//Evacuate players
 		
-		for(Player p : Bukkit.getOnlinePlayers())
-		{
+		Bukkit.getOnlinePlayers().forEach((p) -> {
 			if(p.getWorld().getName().equals("wmg") || p.getWorld().getName().equals("wmg2"))
 			{
 				p.sendMessage("§e§lYou are being evacuated back to your location when the game was started.");
 				p.teleport(evacuationLocations.get(p));
 			}
-		}
+		});
+		
 		//Once done we will truncate the map
 		evacuationLocations.clear();
 		
