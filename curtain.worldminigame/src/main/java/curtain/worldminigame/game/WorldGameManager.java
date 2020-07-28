@@ -90,6 +90,7 @@ public class WorldGameManager implements Listener
 		
 		deleteWorld(deleteFolder);
 		
+		//then we shall do it again
 		World td2 = Bukkit.getWorld("wmg2");
 		File delFolder = td2.getWorldFolder();
 		
@@ -115,23 +116,20 @@ public class WorldGameManager implements Listener
 
 				wc.createWorld();
 			
-			
 				//after create world then teleport people after a couple seconds to ensure the thing works
-				Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), new Runnable() {
-
-					public void run()
+				
+				Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () -> 
+				{
+					Bukkit.broadcastMessage("§e§lSwitching worlds!");
+					Bukkit.getOnlinePlayers().forEach((p) -> 
 					{
-						Bukkit.broadcastMessage("§e§lSwitching worlds!");
-						for(Player p : Bukkit.getOnlinePlayers())
-						{
-							p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 1);
-							Location pLoc = p.getLocation();
-							Location newLoc = new Location(Bukkit.getWorld(worldName), pLoc.getX(), pLoc.getY(), pLoc.getZ());
-							p.teleport(newLoc);
-						}
-					}
-					
+						p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 1);
+						Location pLoc = p.getLocation();
+						Location newLoc = new Location(Bukkit.getWorld(worldName), pLoc.getX(), pLoc.getY(), pLoc.getZ());
+						p.teleport(newLoc);
+					});
 				}, 5 * 20L);
+				
 			}
 			else
 			{
@@ -148,20 +146,16 @@ public class WorldGameManager implements Listener
 				
 				
 					//after create world then teleport people after a couple seconds to ensure the thing works
-					Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), new Runnable() {
-
-						public void run()
+					Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () -> 
+					{
+						Bukkit.broadcastMessage("§e§lSwitching worlds!");
+						Bukkit.getOnlinePlayers().forEach((p) -> 
 						{
-							Bukkit.broadcastMessage("§e§lSwitching worlds!");
-							for(Player p : Bukkit.getOnlinePlayers())
-							{
-								p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 1);
-								Location pLoc = p.getLocation();
-								Location newLoc = new Location(Bukkit.getWorld(newWorld), pLoc.getX(), pLoc.getY(), pLoc.getZ());
-								p.teleport(newLoc);
-							}
-						}
-						
+							p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 1);
+							Location pLoc = p.getLocation();
+							Location newLoc = new Location(Bukkit.getWorld(worldName), pLoc.getX(), pLoc.getY(), pLoc.getZ());
+							p.teleport(newLoc);
+						});
 					}, 5 * 20L);
 					
 					worldName = "wmg2";
@@ -187,20 +181,16 @@ public class WorldGameManager implements Listener
 				
 				
 					//after create world then teleport people after a couple seconds to ensure the thing works
-					Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), new Runnable() {
-
-						public void run()
+					Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () -> 
+					{
+						Bukkit.broadcastMessage("§e§lSwitching worlds!");
+						Bukkit.getOnlinePlayers().forEach((p) -> 
 						{
-							Bukkit.broadcastMessage("§e§lSwitching worlds!");
-							for(Player p : Bukkit.getOnlinePlayers())
-							{
-								p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 1);
-								Location pLoc = p.getLocation();
-								Location newLoc = new Location(Bukkit.getWorld(newWorld), pLoc.getX(), pLoc.getY(), pLoc.getZ());
-								p.teleport(newLoc);
-							}
-						}
-						
+							p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 1);
+							Location pLoc = p.getLocation();
+							Location newLoc = new Location(Bukkit.getWorld(worldName), pLoc.getX(), pLoc.getY(), pLoc.getZ());
+							p.teleport(newLoc);
+						});
 					}, 5 * 20L);
 					
 					worldName = "wmg";
