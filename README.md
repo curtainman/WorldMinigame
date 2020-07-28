@@ -9,7 +9,9 @@ Every 5 minutes, a new world will be generated with a new seed. Players will be 
 
 # Setup
 
-Run /wmg in game to either stop or start the game. You must also have a world named "world" for evacuation if the game stops. This may be changed in the future.
+Run /wmg in game to either stop or start the game.
 The command /wmgforceclean will delete the game-created worlds. This is only for debug purposes, and should only be used as a last resort.
+
+After the game, players will be teleported to the location where they were when the game began!
 
 I am updating this if there are bugs found, or if I want new features.
