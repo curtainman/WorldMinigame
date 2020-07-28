@@ -23,7 +23,7 @@ public class WorldGameManager implements Listener
 	// Automatically updates
 	private static String worldName = "wmg";
 	private static boolean active;
-	private HashMap<String, Location> evacuationLocations = new HashMap<String, Location>();
+	private static HashMap<String, Location> evacuationLocations = new HashMap<String, Location>();
 	
 	@EventHandler
 	public void onDamage(EntityDamageEvent event)
@@ -35,6 +35,10 @@ public class WorldGameManager implements Listener
 				if(event.getCause().equals(DamageCause.SUFFOCATION))
 				{
 					event.setCancelled(true);
+				}
+				else
+				{
+					event.setCancelled(false);
 				}
 			}
 		}
@@ -125,6 +129,7 @@ public class WorldGameManager implements Listener
 					{
 						p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 1);
 						Location pLoc = p.getLocation();
+						
 						Location newLoc = new Location(Bukkit.getWorld(worldName), pLoc.getX(), pLoc.getY(), pLoc.getZ());
 						p.teleport(newLoc);
 					});
