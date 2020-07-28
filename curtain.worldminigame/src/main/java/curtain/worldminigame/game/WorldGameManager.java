@@ -1,6 +1,7 @@
 package curtain.worldminigame.game;
 
 import java.io.File;
+import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -22,7 +23,7 @@ public class WorldGameManager implements Listener
 	// Automatically updates
 	private static String worldName = "wmg";
 	private static boolean active;
-
+	private HashMap<Player, Location> evacuationLocations = new HashMap<Player, Location>();
 	
 	@EventHandler
 	public void onDamage(EntityDamageEvent event)
@@ -49,6 +50,9 @@ public class WorldGameManager implements Listener
 	{
 		Bukkit.broadcastMessage("§a§lWorld Game started! Every 5 minutes, a new world will be generated. You will be teleported to your exact coords but inside of that newly created world. You will not take damage from suffocation. Good luck!");
 		active = true;
+		Bukkit.getOnlinePlayers().forEach((p) -> {
+			evacuationLocations.put(p, p.getLocation());
+		});
 		new SwitchTask().runTaskTimer(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), 0L, 6000L);
 	}
 	
@@ -63,26 +67,34 @@ public class WorldGameManager implements Listener
 	{
 		
 		//Evacuate players
-		Location newLoc = Bukkit.getWorld("world").getSpawnLocation();
 		
 		for(Player p : Bukkit.getOnlinePlayers())
 		{
 			if(p.getWorld().getName().equals("wmg") || p.getWorld().getName().equals("wmg2"))
 			{
-				p.sendMessage("§e§lYou are being evacuated back to the main world spawn.");
-				p.teleport(newLoc);
+				p.sendMessage("§e§lYou are being evacuated back to your location when the game was started.");
+				p.teleport(evacuationLocations.get(p));
 			}
 		}
+		//Once done we will truncate the map
+		evacuationLocations.clear();
 		
 		
-		//Delete
+		//Delete the worlds!
 		
 		World toDelete = Bukkit.getWorld("wmg");
 		File deleteFolder = toDelete.getWorldFolder();
+		
+		//unload then delete
+		Bukkit.unloadWorld("wmg", false);
+		
 		deleteWorld(deleteFolder);
 		
 		World td2 = Bukkit.getWorld("wmg2");
 		File delFolder = td2.getWorldFolder();
+		
+		Bukkit.unloadWorld("wmg2", false);
+		
 		deleteWorld(delFolder);
 		
 		
@@ -155,6 +167,9 @@ public class WorldGameManager implements Listener
 					worldName = "wmg2";
 					
 					//Delete old one!
+					
+					Bukkit.unloadWorld("wmg", false);
+					
 					World toDelete = Bukkit.getWorld("wmg");
 					File deleteFolder = toDelete.getWorldFolder();
 					deleteWorld(deleteFolder);
@@ -189,6 +204,9 @@ public class WorldGameManager implements Listener
 					}, 5 * 20L);
 					
 					worldName = "wmg";
+					
+					
+					Bukkit.unloadWorld("wmg", false);
 					
 					//Delete old one!
 					World toDelete = Bukkit.getWorld("wmg2");
