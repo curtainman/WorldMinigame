@@ -23,7 +23,7 @@ public class WorldGameManager implements Listener
 	// Automatically updates
 	private static String worldName = "wmg";
 	private static boolean active;
-	private HashMap<Player, Location> evacuationLocations = new HashMap<Player, Location>();
+	private HashMap<String, Location> evacuationLocations = new HashMap<String, Location>();
 	
 	@EventHandler
 	public void onDamage(EntityDamageEvent event)
@@ -51,7 +51,7 @@ public class WorldGameManager implements Listener
 		Bukkit.broadcastMessage("§a§lWorld Game started! Every 5 minutes, a new world will be generated. You will be teleported to your exact coords but inside of that newly created world. You will not take damage from suffocation. Good luck!");
 		active = true;
 		Bukkit.getOnlinePlayers().forEach((p) -> {
-			evacuationLocations.put(p, p.getLocation());
+			evacuationLocations.put(p.getName(), p.getLocation());
 		});
 		new SwitchTask().runTaskTimer(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), 0L, 6000L);
 	}
@@ -72,7 +72,7 @@ public class WorldGameManager implements Listener
 			if(p.getWorld().getName().equals("wmg") || p.getWorld().getName().equals("wmg2"))
 			{
 				p.sendMessage("§e§lYou are being evacuated back to your location when the game was started.");
-				p.teleport(evacuationLocations.get(p));
+				p.teleport(evacuationLocations.get(p.getName()));
 			}
 		});
 		
