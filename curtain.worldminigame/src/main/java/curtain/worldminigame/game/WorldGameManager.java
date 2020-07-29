@@ -89,29 +89,36 @@ public class WorldGameManager implements Listener
 		
 		
 		World toDelete = Bukkit.getWorld("wmg");
-		File deleteFolder = toDelete.getWorldFolder();
-		if(deleteFolder != null)
+		if(toDelete.getWorldFolder() != null)
 		{
-			Bukkit.unloadWorld("wmg", true); //idk why i have to put true after that but so be it
-			
-			Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () ->
+			File deleteFolder = toDelete.getWorldFolder();
+			if(deleteFolder != null)
 			{
-				deleteWorld(deleteFolder);
-			}, 60L);
+				Bukkit.unloadWorld("wmg", true); //idk why i have to put true after that but so be it
+				
+				Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () ->
+				{
+					deleteWorld(deleteFolder);
+				}, 60L);
+			}
 		}
+		
 		
 		
 		//then we shall do it again
 		World td2 = Bukkit.getWorld("wmg2");
-		File delFolder = td2.getWorldFolder();
-		if(delFolder != null)
+		if(td2.getWorldFolder() != null)
 		{
-			
-			Bukkit.unloadWorld("wmg2", true);
-			Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () ->
+			File deleteFolder = td2.getWorldFolder();
+			if(deleteFolder != null)
 			{
-				deleteWorld(delFolder);
-			}, 60L);
+				Bukkit.unloadWorld("wmg2", true); //idk why i have to put true after that but so be it
+				
+				Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () ->
+				{
+					deleteWorld(deleteFolder);
+				}, 60L);
+			}
 		}
 
 		
