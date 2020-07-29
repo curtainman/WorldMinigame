@@ -90,7 +90,7 @@ public class WorldGameManager implements Listener
 		//unload then delete
 		
 		
-		Bukkit.unloadWorld("wmg", true);
+		Bukkit.unloadWorld("wmg", false);
 		
 		Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () -> 
 		{
@@ -109,7 +109,7 @@ public class WorldGameManager implements Listener
 		
 		if(Bukkit.getWorld("wmg2") != null)
 		{
-			Bukkit.unloadWorld("wmg2", true);
+			Bukkit.unloadWorld("wmg2", false);
 			
 			Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () -> 
 			{
@@ -189,7 +189,7 @@ public class WorldGameManager implements Listener
 					
 					//Delete old one!
 					
-					Bukkit.unloadWorld("wmg", true);
+					Bukkit.unloadWorld("wmg", false);
 					
 					Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () -> 
 					{
@@ -232,7 +232,7 @@ public class WorldGameManager implements Listener
 					worldName = "wmg";
 					
 					
-					Bukkit.unloadWorld("wmg", true);
+					Bukkit.unloadWorld("wmg", false);
 					
 					//Delete old one!
 					Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () -> 
