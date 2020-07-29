@@ -92,7 +92,10 @@ public class WorldGameManager implements Listener
 		//unload then delete
 		Bukkit.unloadWorld("wmg", true); //idk why i have to put true after that but so be it
 		
-		deleteWorld(deleteFolder);
+		Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () ->
+		{
+			deleteWorld(deleteFolder);
+		}, 60L);
 		
 		//then we shall do it again
 		World td2 = Bukkit.getWorld("wmg2");
@@ -100,7 +103,14 @@ public class WorldGameManager implements Listener
 		
 		Bukkit.unloadWorld("wmg2", true);
 		
-		deleteWorld(delFolder);
+		
+		
+		Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () ->
+		{
+			deleteWorld(delFolder);
+		}, 60L);
+		
+
 		
 		
 	}
@@ -171,7 +181,10 @@ public class WorldGameManager implements Listener
 					
 					World toDelete = Bukkit.getWorld("wmg");
 					File deleteFolder = toDelete.getWorldFolder();
-					deleteWorld(deleteFolder);
+					Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () ->
+					{
+						deleteWorld(deleteFolder);
+					}, 60L);
 					
 				}
 				else if (worldName.equals("wmg2"))
@@ -206,7 +219,11 @@ public class WorldGameManager implements Listener
 					//Delete old one!
 					World toDelete = Bukkit.getWorld("wmg2");
 					File deleteFolder = toDelete.getWorldFolder();
-					deleteWorld(deleteFolder);
+					Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () ->
+					{
+						deleteWorld(deleteFolder);
+					}, 60L);
+					
 				}
 			}
 		}
