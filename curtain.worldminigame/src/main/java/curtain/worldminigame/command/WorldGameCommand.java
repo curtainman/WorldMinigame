@@ -32,8 +32,17 @@ public class WorldGameCommand implements CommandExecutor
 						}
 						if(args[0].equals("stop"))
 						{
-							WorldMinigamePlugin.getManager().stopGame();
-							return true;
+							if(WorldMinigamePlugin.getManager().isActive())
+							{
+								WorldMinigamePlugin.getManager().stopGame();
+								return true;
+							}
+							else
+							{
+								player.sendMessage("§cCannot stop now!");
+								return false;
+							}
+
 						}
 					}
 					else
