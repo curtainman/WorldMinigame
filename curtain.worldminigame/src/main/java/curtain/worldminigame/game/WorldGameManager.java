@@ -100,15 +100,16 @@ public class WorldGameManager implements Listener
 		//then we shall do it again
 		World td2 = Bukkit.getWorld("wmg2");
 		File delFolder = td2.getWorldFolder();
-		
-		Bukkit.unloadWorld("wmg2", true);
-		
-		
-		
-		Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () ->
+		if(delFolder != null)
 		{
-			deleteWorld(delFolder);
-		}, 60L);
+			
+			Bukkit.unloadWorld("wmg2", true);
+			Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () ->
+			{
+				deleteWorld(delFolder);
+			}, 60L);
+		}
+
 		
 
 		
