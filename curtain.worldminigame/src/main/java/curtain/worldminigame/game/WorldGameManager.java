@@ -23,7 +23,7 @@ public class WorldGameManager implements Listener
 	// Automatically updates
 	private static String worldName = "wmg";
 	private static boolean active;
-	private static HashMap<String, Location> evacuationLocations = new HashMap<String, Location>();
+	public static HashMap<String, Location> evacuationLocations = new HashMap<String, Location>();
 	
 	@EventHandler
 	public void onDamage(EntityDamageEvent event)
@@ -90,7 +90,7 @@ public class WorldGameManager implements Listener
 		File deleteFolder = toDelete.getWorldFolder();
 		
 		//unload then delete
-		Bukkit.unloadWorld("wmg", false);
+		Bukkit.unloadWorld("wmg", true); //idk why i have to put true after that but so be it
 		
 		deleteWorld(deleteFolder);
 		
@@ -98,7 +98,7 @@ public class WorldGameManager implements Listener
 		World td2 = Bukkit.getWorld("wmg2");
 		File delFolder = td2.getWorldFolder();
 		
-		Bukkit.unloadWorld("wmg2", false);
+		Bukkit.unloadWorld("wmg2", true);
 		
 		deleteWorld(delFolder);
 		
@@ -167,7 +167,7 @@ public class WorldGameManager implements Listener
 					
 					//Delete old one!
 					
-					Bukkit.unloadWorld("wmg", false);
+					Bukkit.unloadWorld("wmg", true);
 					
 					World toDelete = Bukkit.getWorld("wmg");
 					File deleteFolder = toDelete.getWorldFolder();
@@ -201,7 +201,7 @@ public class WorldGameManager implements Listener
 					worldName = "wmg";
 					
 					
-					Bukkit.unloadWorld("wmg", false);
+					Bukkit.unloadWorld("wmg", true);
 					
 					//Delete old one!
 					World toDelete = Bukkit.getWorld("wmg2");
