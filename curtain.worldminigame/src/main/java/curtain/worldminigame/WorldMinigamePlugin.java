@@ -18,6 +18,13 @@ public class WorldMinigamePlugin extends JavaPlugin
 		this.getCommand("wmgforceclean").setExecutor(new CleanWorldCommand());
 	}
 	
+	@Override
+	public void onDisable()
+	{
+		//you know maybe we SHOULD do this before everything goes kaboom 
+		getManager().cleanWorlds();
+	}
+	
 	public static WorldGameManager getManager()
 	{
 		return new WorldGameManager();
