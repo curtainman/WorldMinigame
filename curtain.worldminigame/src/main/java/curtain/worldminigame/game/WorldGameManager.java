@@ -1,8 +1,10 @@
 package curtain.worldminigame.game;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
+import org.apache.commons.io.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -88,42 +90,40 @@ public class WorldGameManager implements Listener
 		//unload then delete
 		
 		
-		World toDelete = Bukkit.getWorld("wmg");
-		if(toDelete.getWorldFolder() != null)
+		Bukkit.unloadWorld("wmg", true);
+		
+		Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () -> 
 		{
-			File deleteFolder = toDelete.getWorldFolder();
-			if(deleteFolder != null)
+			try
 			{
-				Bukkit.unloadWorld("wmg", true); //idk why i have to put true after that but so be it
-				
-				Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () ->
-				{
-					deleteWorld(deleteFolder);
-				}, 60L);
+				FileUtils.deleteDirectory(new File("wmg"));
+			} catch (IOException e)
+			{
+				System.out.println("fuck");
+				e.printStackTrace();
 			}
-		}
-		
-		
+		}, 60L);
+
 		
 		//then we shall do it again
-		World td2 = Bukkit.getWorld("wmg2");
-		if(td2.getWorldFolder() != null)
+		
+		if(Bukkit.getWorld("wmg2") != null)
 		{
-			File deleteFolder = td2.getWorldFolder();
-			if(deleteFolder != null)
+			Bukkit.unloadWorld("wmg2", true);
+			
+			Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () -> 
 			{
-				Bukkit.unloadWorld("wmg2", true); //idk why i have to put true after that but so be it
-				
-				Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () ->
+				try
 				{
-					deleteWorld(deleteFolder);
-				}, 60L);
-			}
+					FileUtils.deleteDirectory(new File("wmg2"));
+					
+				} catch (IOException e)
+				{
+					System.out.println("fuck");
+					e.printStackTrace();
+				}
+			}, 60L);
 		}
-
-		
-
-		
 		
 	}
 	
@@ -191,11 +191,17 @@ public class WorldGameManager implements Listener
 					
 					Bukkit.unloadWorld("wmg", true);
 					
-					World toDelete = Bukkit.getWorld("wmg");
-					File deleteFolder = toDelete.getWorldFolder();
-					Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () ->
+					Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () -> 
 					{
-						deleteWorld(deleteFolder);
+						try
+						{
+							FileUtils.deleteDirectory(new File("wmg"));
+							
+						} catch (IOException e)
+						{
+							System.out.println("fuck");
+							e.printStackTrace();
+						}
 					}, 60L);
 					
 				}
@@ -229,11 +235,17 @@ public class WorldGameManager implements Listener
 					Bukkit.unloadWorld("wmg", true);
 					
 					//Delete old one!
-					World toDelete = Bukkit.getWorld("wmg2");
-					File deleteFolder = toDelete.getWorldFolder();
-					Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () ->
+					Bukkit.getScheduler().scheduleSyncDelayedTask(WorldMinigamePlugin.getPlugin(WorldMinigamePlugin.class), () -> 
 					{
-						deleteWorld(deleteFolder);
+						try
+						{
+							FileUtils.deleteDirectory(new File("wmg2"));
+							
+						} catch (IOException e)
+						{
+							System.out.println("fuck");
+							e.printStackTrace();
+						}
 					}, 60L);
 					
 				}
