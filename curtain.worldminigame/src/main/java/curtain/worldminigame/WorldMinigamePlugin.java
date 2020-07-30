@@ -16,13 +16,14 @@ public class WorldMinigamePlugin extends JavaPlugin
 		Bukkit.getPluginManager().registerEvents(new WorldGameManager(), this);
 		this.getCommand("worldgame").setExecutor(new WorldGameCommand());
 		this.getCommand("wmgforceclean").setExecutor(new CleanWorldCommand());
+		//you know maybe we SHOULD do this before everything goes kaboom 
+		getManager().cleanWorlds();
 	}
 	
 	@Override
 	public void onDisable()
 	{
-		//you know maybe we SHOULD do this before everything goes kaboom 
-		getManager().cleanWorlds();
+
 	}
 	
 	public static WorldGameManager getManager()
